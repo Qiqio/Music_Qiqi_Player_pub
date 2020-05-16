@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Music Qiqi Player</string>
+    <string name="home_local_music">Your Local Music</string>
+    <string name="title_activity_play_music">Music Playing</string>
+
+
+</resources>
