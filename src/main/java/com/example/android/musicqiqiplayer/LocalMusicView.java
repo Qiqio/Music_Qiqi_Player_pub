@@ -2,8 +2,10 @@ package com.example.android.musicqiqiplayer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -11,8 +13,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class LocalMusicView extends AppCompatActivity {
-    MediaPlayer mediaPlayer;
-    MediaPlayer lastMP;
+
+    //MediaPlayer mediaPlayer;
+    //MediaPlayer lastMP;
 
 
     @Override
@@ -37,13 +40,15 @@ public class LocalMusicView extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(lastMP!= null && lastMP.isPlaying() == true)
-                    lastMP.stop();
-                if(mediaPlayer!= null && mediaPlayer.isPlaying() == true)
-                    mediaPlayer.stop();
+
                 Song currentSong = songList.get(position);
+
+                startPlayMusicActivity(currentSong);
+                /*
                 mediaPlayer = MediaPlayer.create(LocalMusicView.this, currentSong.getSongResId());
                 mediaPlayer.start();
+
+                 */
             }
         });
     }
@@ -51,11 +56,11 @@ public class LocalMusicView extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-
+/*
         if (mediaPlayer != null){
             lastMP = mediaPlayer;
         }
-/*
+
         if (mediaPlayer != null) {
             resumedActivity = true;
             pausedMilliSec = mediaPlayer.getCurrentPosition();
@@ -67,4 +72,14 @@ public class LocalMusicView extends AppCompatActivity {
         super.onRestart();
         //never comes here?!
     }
+
+    /** Called when the user taps the a song from the list */
+    /** start the play music activity and forward the song of chose within the intent */
+    public void startPlayMusicActivity(Song song) {
+        Intent intent = new Intent(this, PlayMusicActivity.class);
+        intent.putExtra("songResId",song.getSongResId());
+        startActivity(intent);
+        Log.i("qiqi", "sendMessage: currentSong = " + song.getSongTitle());
+    }
+
 }

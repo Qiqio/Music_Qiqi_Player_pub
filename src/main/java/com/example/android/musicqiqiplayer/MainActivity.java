@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
         ImageView playMusic = findViewById(R.id.home_play);
         playMusic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+         */
 
     }
 }
